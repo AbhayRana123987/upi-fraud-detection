@@ -1,31 +1,45 @@
-# UPI Fraud Detection System
+# 💳 UPI Fraud Detection System
 
-An end-to-end machine learning project designed to identify potentially fraudulent UPI transactions using transaction-level data and classification algorithms.
+An end-to-end machine learning project that explores the classification of potentially fraudulent UPI transactions using Python, scikit-learn, FastAPI, and Streamlit.
 
-## Overview
+The project includes exploratory data analysis, multiple classification algorithms, a FastAPI prediction API, and a Streamlit interface for entering transaction details and viewing predictions.
 
-Digital payment systems such as UPI process a large number of transactions every day, making automated fraud detection an important problem.
+## 📸 Project Screenshots
 
-This project uses machine learning to analyze transaction characteristics such as transaction type, amount, merchant category, location, banking information, device type, network type, and transaction timing to classify transactions as:
+### 1. Streamlit Application
 
-- **0 → Genuine Transaction**
-- **1 → Fraudulent Transaction**
+Enter transaction details through the interactive web interface.
 
-## Features
+![Streamlit transaction input form](screenshots/streamlit-form.png)
 
-- Transaction amount analysis
-- Transaction type analysis
-- Merchant category analysis
-- Sender and receiver information
-- Banking information
-- Device and network information
-- Time-based transaction features
-- Machine learning based fraud classification
-- Model performance evaluation using classification metrics
+### 2. Prediction Result
 
-## Machine Learning
+Example output from the application. This screenshot shows a transaction classified as genuine.
 
-The project explores multiple classification algorithms:
+![UPI transaction prediction result](screenshots/prediction-result.png)
+
+### 3. FastAPI Prediction API
+
+The `/predict` endpoint accepts transaction data and returns a JSON response.
+
+![FastAPI prediction response](screenshots/api-response.png)
+
+## ✨ Features
+
+- Exploratory data analysis and preprocessing
+- Transaction amount and transaction type analysis
+- Sender and receiver attributes
+- Merchant category and banking information
+- Device, network, and time-based features
+- Comparison of multiple classification algorithms
+- Model evaluation using classification metrics
+- FastAPI backend for transaction predictions
+- Streamlit frontend for interactive transaction input
+- JSON responses from the prediction API
+
+## 🤖 Machine Learning
+
+The notebook explores the following classification algorithms:
 
 - Logistic Regression
 - K-Nearest Neighbors (KNN)
@@ -34,58 +48,137 @@ The project explores multiple classification algorithms:
 - Support Vector Machine (SVM)
 - Random Forest
 
-Model performance is evaluated using:
+Model evaluation includes:
 
-- Confusion Matrix
+- Confusion matrix
 - Precision
 - Recall
-- F1-Score
+- F1-score
 - Accuracy
 
-Since fraud detection involves highly imbalanced classes, the project focuses particularly on the model's ability to identify fraudulent transactions.
+Fraud detection is a highly imbalanced classification problem. Therefore, accuracy alone is not sufficient to determine whether a model is useful for detecting fraud.
 
-## Dataset
+## 🛠️ Tech Stack
 
-The project uses a UPI transaction dataset containing transaction-level information.
+- **Language:** Python
+- **Data analysis:** Pandas, NumPy
+- **Visualization:** Matplotlib, Seaborn
+- **Machine learning:** Scikit-learn
+- **API:** FastAPI, Uvicorn
+- **Frontend:** Streamlit
+- **Development:** Jupyter Notebook, VS Code
+- **Version control:** Git and GitHub
 
-The dataset includes features such as:
-
-- Transaction type
-- Merchant category
-- Transaction amount
-- Sender age group
-- Receiver age group
-- Sender state
-- Sender bank
-- Receiver bank
-- Device type
-- Network type
-- Hour of transaction
-- Day of week
-- Weekend indicator
-
-> **Note:** The dataset used in this project is intended for educational and machine learning experimentation purposes.
-
-## Tech Stack
-
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-- Jupyter Notebook
-- VS Code
-- Git & GitHub
-
-## Project Structure
+## 📂 Project Structure
 
 ```text
-UPI-Fraud-Detection/
-│
+archive/
+├── backend/
+│   └── main.py
+├── models/
+│   ├── random_forest_candidate.pkl
+│   └── preprocessor.pkl
 ├── notebooks/
 │   └── UPI_Fraud_Detection.ipynb
-│
+├── screenshots/
+│   ├── api-response.png
+│   ├── streamlit-form.png
+│   └── prediction-result.png
+├── app.py
 ├── .gitignore
-├── README.md
-└── upi_transactions_2024.csv
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.10 or a compatible Python version
+- Git
+- pip
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/AbhayRana123987/upi-fraud-detection.git
+cd upi-fraud-detection
+```
+
+### 2. Create and activate a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+**Windows PowerShell:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+Install the libraries used by the application and notebook. If the repository contains a `requirements.txt`, run:
+
+```bash
+pip install -r requirements.txt
+```
+
+Otherwise, install the core application dependencies:
+
+```bash
+pip install fastapi uvicorn streamlit pandas numpy scikit-learn joblib
+```
+
+Additional libraries may be required to run the notebook, depending on the imports used.
+
+### 4. Start the FastAPI backend
+
+From the project root, run:
+
+```bash
+uvicorn backend.main:app --reload --port 8000
+```
+
+Open the interactive API documentation at:
+
+http://127.0.0.1:8000/docs
+
+### 5. Start the Streamlit frontend
+
+Open a second terminal in the project root, activate the same virtual environment, and run:
+
+```bash
+python -m streamlit run app.py
+```
+
+Streamlit will display a local URL, typically:
+
+http://localhost:8501
+
+Keep the FastAPI backend running while using the frontend.
+
+## 🔌 API Endpoint
+
+**Endpoint:** `POST /predict`
+
+The API accepts transaction features such as transaction type, amount, merchant category, sender and receiver information, device, network, and timing attributes.
+
+The response includes a predicted transaction class and a fraud probability, as implemented by the backend.
+
+Explore the endpoint and its required request fields through the FastAPI documentation at `/docs`.
+
+## 📊 Dataset
+
+The project uses a UPI transaction dataset containing transaction-level features, including:
+
+- Transaction type and amount
+- Merchant category
+- Sender and receiver age groups
+- Sender state
+- Sender and receiver banks
+- Device type and network type
+- Hour of day and day of week
+- Weekend indicator
+
+The dataset is used for educational experimentation. The CSV is excluded
